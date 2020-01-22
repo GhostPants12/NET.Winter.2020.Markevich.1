@@ -34,15 +34,12 @@ namespace NumbersExtension.MSTests
 
             Assert.AreEqual(expectedResult, functionResult);
         }
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow(24, 15, 2, 33)]
+        [DataRow(256, 968, -2, 16)]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void InsertNumberIntoAnother_JIsOutOfRange_ThrowArgumentOutOfRangeException() =>
-            InsertNumberIntoAnother(24, 15, 2, 33);
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void InsertNumberIntoAnother_IIsOutOfRange_ThrowArgumentOutOfRangeException() =>
-           InsertNumberIntoAnother(256, 968, -2, 16);
+        public void InsertNumberIntoAnother_ArgumentIsOutOfRange_ThrowArgumentOutOfRangeException(int a, int b, int c, int d) =>
+            InsertNumberIntoAnother(a,b,c,d);
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

@@ -23,24 +23,14 @@
         /// <exception cref="ArgumentException">i is higher than j.</exception>
         public static int InsertNumberIntoAnother(int numberSource, int numberIn, int i, int j)
         {
-            if (i < 0)
+            if (i < 0 || i > 31)
             {
-                throw new ArgumentOutOfRangeException(nameof(i), "i is less than zero");
+                throw new ArgumentOutOfRangeException(nameof(i), "i is out of range");
             }
 
-            if (j < 0)
+            if (j < 0 || j > 31)
             {
-                throw new ArgumentOutOfRangeException(nameof(j), "j is less than zero");
-            }
-
-            if (i > 31)
-            {
-                throw new ArgumentOutOfRangeException(nameof(i), "i is greater than number of bits in int");
-            }
-
-            if (j > 31)
-            {
-                throw new ArgumentOutOfRangeException(nameof(j), "j is greater than number of bits in int");
+                throw new ArgumentOutOfRangeException(nameof(j), "j is out of range");
             }
 
             if (i > j)
@@ -59,36 +49,20 @@
             }
 
             int bitMaskForNumberIn, bitMaskForNumberSource;
-            bitMaskForNumberIn = ~(int.MaxValue << CheckSubstraction(j + 1, i)) & int.MaxValue;
+            bitMaskForNumberIn = ~(int.MaxValue << (j + 1 - i)) & int.MaxValue;
             int insertValue = (numberIn & bitMaskForNumberIn) << i;
             if (numberSource >= 0)
             {
-                bitMaskForNumberSource = (int.MaxValue >> (31 - i)) | ((int.MaxValue << CheckSubstraction(j, -1)) & int.MaxValue);
+                bitMaskForNumberSource = (int.MaxValue >> (31 - i)) | ((int.MaxValue << (j + 1)) & int.MaxValue);
             }
             else
             {
-                bitMaskForNumberSource = (int.MaxValue >> (31 - i)) | (((int.MaxValue << CheckSubstraction(j, -1)) & int.MaxValue) | (int.MaxValue << 30));
+                bitMaskForNumberSource = (int.MaxValue >> (31 - i)) | (((int.MaxValue << (j + 1)) & int.MaxValue) | (int.MaxValue << 30));
             }
 
             int putOutValue = numberSource & bitMaskForNumberSource;
             putOutValue |= insertValue;
             return putOutValue;
-        }
-
-        /// <summary>Checks the substraction.</summary>
-        /// <param name="x">The reduced value.</param>
-        /// <param name="y">The substracted value.</param>
-        /// <returns>The substraction of two values that doesn't exceed 31.</returns>
-        public static int CheckSubstraction(int x, int y)
-        {
-            if (x - y > 31)
-            {
-                return 31;
-            }
-            else
-            {
-                return x - y;
-            }
         }
     }
 }

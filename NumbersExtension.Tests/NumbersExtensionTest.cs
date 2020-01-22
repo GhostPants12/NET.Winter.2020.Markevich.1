@@ -25,11 +25,9 @@ namespace NumbersExtension.Tests
         public void InsertNumberIntoAnother_I_GreaterThan_J_ThrowArgumentException() =>
             Assert.Throws<ArgumentException>(() => InsertNumberIntoAnother(256798, 190, 16, 8), "i is greater than j.");
 
-        [Test]
-        public void InsertNumberIntoAnother_J_OutOfRange_ThrowArgumentOutOfRangeException() =>
-            Assert.Throws<ArgumentOutOfRangeException>(() => InsertNumberIntoAnother(67, 56, 0, 32));
-        [Test]
-        public void InsertNumberIntoAnother_I_OutOfRange_ThrowArgumentOutOfRangeException() =>
-            Assert.Throws<ArgumentOutOfRangeException>(() => InsertNumberIntoAnother(67, 56, 32, 32));
+        [TestCase(67, 56, 0, 32)]
+        [TestCase(67, 56, 32, 32)]
+        public void InsertNumberIntoAnother_Argument_OutOfRange_ThrowArgumentOutOfRangeException(int numberSource, int numberIn, int i, int j) =>
+            Assert.Throws<ArgumentOutOfRangeException>(() => InsertNumberIntoAnother(numberSource, numberIn, i, j));
     }
 }
