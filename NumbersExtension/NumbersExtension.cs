@@ -73,7 +73,7 @@
         {
             if (value < 0)
             {
-                return false;
+                throw new ArgumentOutOfRangeException(nameof(value), "Value cannot be less than zero");
             }
 
             int valueCopy = value;

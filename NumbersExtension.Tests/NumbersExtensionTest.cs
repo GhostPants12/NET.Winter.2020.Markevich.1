@@ -31,6 +31,10 @@ namespace NumbersExtension.Tests
             IsPalindrome(param);
 
         [Test]
+        public void IsPalindrome_NegativeParameter_ThrowArgumentOutOfRangeException() =>
+            Assert.Throws<ArgumentOutOfRangeException>(() => IsPalindrome(-50), "Value cannot be less than zero");
+
+        [Test]
         public void InsertNumberIntoAnother_I_GreaterThan_J_ThrowArgumentException() =>
             Assert.Throws<ArgumentException>(() => InsertNumberIntoAnother(256798, 190, 16, 8), "i is greater than j.");
 
