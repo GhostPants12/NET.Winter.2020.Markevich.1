@@ -71,6 +71,11 @@
         ///   <c>true</c> if the specified value is palindrome; otherwise, <c>false</c>.</returns>
         public static bool IsPalindrome(int value)
         {
+            if (value < 0)
+            {
+                return false;
+            }
+
             int valueCopy = value;
             int decimalPlaces = 1;
             int tenDivider;

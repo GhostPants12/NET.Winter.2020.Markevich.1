@@ -27,7 +27,6 @@ namespace NumbersExtension.Tests
         [TestCase(505605,ExpectedResult =false)]
         [TestCase(606606,ExpectedResult = true)]
         [TestCase(909909,ExpectedResult =true)]
-        [TestCase(-909909, ExpectedResult = true)]
         public bool IsPalindrome_WithValidParameter(int param) =>
             IsPalindrome(param);
 
