@@ -10,10 +10,10 @@ namespace NumbersExtension.MSTests
         [TestMethod]
         public void InsertNumberIntoAnother_WithValidParameters_Result1600()
         {
-            int numberSource=0;
-            int numberIn=1480;
-            int i=3;
-            int j=10;
+            int numberSource = 0;
+            int numberIn = 1480;
+            int i = 3;
+            int j = 10;
             int expectedResult = 1600;
 
             int functionResult = InsertNumberIntoAnother(numberSource, numberIn, i, j);
@@ -39,11 +39,27 @@ namespace NumbersExtension.MSTests
         [DataRow(256, 968, -2, 16)]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void InsertNumberIntoAnother_ArgumentIsOutOfRange_ThrowArgumentOutOfRangeException(int a, int b, int c, int d) =>
-            InsertNumberIntoAnother(a,b,c,d);
+            InsertNumberIntoAnother(a, b, c, d);
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void InsertNumberIntoAnother_IIsHigherThanJ_ThrowArgumentException() =>
             InsertNumberIntoAnother(165, 248, 25, 3);
+
+        [TestMethod]
+        public void IsPalindrome_Value909909_ExpectedTrue()
+        {
+            bool expected = true;
+            bool result = IsPalindrome(909909);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void IsPalindrome_Value909999_ExpectedFalse()
+        {
+            bool expected = false;
+            bool result = IsPalindrome(909999);
+            Assert.AreEqual(expected, result);
+        }
     }
 }

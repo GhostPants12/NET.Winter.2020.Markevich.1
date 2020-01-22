@@ -100,9 +100,16 @@
             tenDivider = (int)Math.Pow(10, decimalPlaces - 1);
             if (value / tenDivider == value % 10)
             {
-                if (value / tenDivider / 10 == 0 && (value / 10) % 10 == 0)
+                if ((value % tenDivider) / (tenDivider / 10) == 0)
                 {
-                    return IsPalindrome(((value % tenDivider) / 10) + (tenDivider / 100) + 1);
+                    if ((value / 10) % 10 == 0)
+                    {
+                        return IsPalindrome(((value % tenDivider) / 10) + (tenDivider / 100) + 1);
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
 
                 return IsPalindrome((value % tenDivider) / 10);
