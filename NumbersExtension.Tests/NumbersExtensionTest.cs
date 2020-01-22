@@ -21,6 +21,16 @@ namespace NumbersExtension.Tests
         public int InsertNumberIntoAnother_WithAllValidParameters(int numberSource, int numberIn, int i, int j) =>
             InsertNumberIntoAnother(numberSource, numberIn, i, j);
 
+        [TestCase(666, ExpectedResult = true)]
+        [TestCase(10101,ExpectedResult = true)]
+        [TestCase(20292, ExpectedResult =false)]
+        [TestCase(505605,ExpectedResult =false)]
+        [TestCase(606606,ExpectedResult = true)]
+        [TestCase(909909,ExpectedResult =true)]
+        [TestCase(-909909, ExpectedResult = true)]
+        public bool IsPalindrome_WithValidParameter(int param) =>
+            IsPalindrome(param);
+
         [Test]
         public void InsertNumberIntoAnother_I_GreaterThan_J_ThrowArgumentException() =>
             Assert.Throws<ArgumentException>(() => InsertNumberIntoAnother(256798, 190, 16, 8), "i is greater than j.");
