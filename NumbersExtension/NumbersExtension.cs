@@ -23,12 +23,15 @@
         /// <exception cref="ArgumentException">i is higher than j.</exception>
         public static int InsertNumberIntoAnother(int numberSource, int numberIn, int i, int j)
         {
-            if (i < 0 || i > 31)
+            const int intMaxBit = 31;
+            const int intMinBit = 0;
+
+            if (i < intMinBit || i > intMaxBit)
             {
                 throw new ArgumentOutOfRangeException(nameof(i), "i is out of range");
             }
 
-            if (j < 0 || j > 31)
+            if (j < intMinBit || j > intMaxBit)
             {
                 throw new ArgumentOutOfRangeException(nameof(j), "j is out of range");
             }
@@ -38,12 +41,12 @@
                 throw new ArgumentException("i is higher than j");
             }
 
-            if (i == 0 && j == 31)
+            if (i == intMinBit && j == intMaxBit)
             {
                 return numberIn;
             }
 
-            if (j == 31)
+            if (j == intMaxBit)
             {
                 numberSource &= int.MaxValue;
             }
@@ -53,11 +56,11 @@
             int insertValue = (numberIn & bitMaskForNumberIn) << i;
             if (numberSource >= 0)
             {
-                bitMaskForNumberSource = (int.MaxValue >> (31 - i)) | ((int.MaxValue << (j + 1)) & int.MaxValue);
+                bitMaskForNumberSource = (int.MaxValue >> (intMaxBit - i)) | ((int.MaxValue << (j + 1)) & int.MaxValue);
             }
             else
             {
-                bitMaskForNumberSource = (int.MaxValue >> (31 - i)) | (((int.MaxValue << (j + 1)) & int.MaxValue) | (int.MaxValue << 30));
+                bitMaskForNumberSource = (int.MaxValue >> (intMaxBit - i)) | (((int.MaxValue << (j + 1)) & int.MaxValue) | (int.MaxValue << (intMaxBit - 1)));
             }
 
             int putOutValue = numberSource & bitMaskForNumberSource;

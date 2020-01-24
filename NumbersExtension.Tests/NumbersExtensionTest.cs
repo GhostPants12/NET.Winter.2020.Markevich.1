@@ -6,6 +6,29 @@ namespace NumbersExtension.Tests
 {
     public class NumbersExtensionTests
     {
+        //171 ms
+        [Test]
+        [Order(2)]
+        [Timeout(500)]
+        public void PossiblyVerySlowCode_WithTimeLessThan1000Milliseconds()
+        {
+            for (int source = 0; source < 1_000_000; source++)
+            {
+                NumbersExtension.IsPalindrome(source);
+            }
+        }
+
+        //1 sec
+        [Test]
+        [Order(1)]
+        [Timeout(2_000)]
+        public void PossiblyVerySlowCode_WithTimeLessThan25000Milliseconds()
+        {
+            for (int source = 0; source < 10_000_000; source++)
+            {
+                NumbersExtension.IsPalindrome(source);
+            }
+        }
         [TestCase(2728, 655, 3, 8, ExpectedResult = 2680)]
         [TestCase(554216104, 15, 0, 31, ExpectedResult = 15)]
         [TestCase(-55465467, 345346, 0, 31, ExpectedResult = 345346)]
